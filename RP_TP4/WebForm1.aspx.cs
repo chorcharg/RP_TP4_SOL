@@ -11,12 +11,12 @@ namespace RP_TP4
     public partial class WebForm1 : System.Web.UI.Page
     {
 
-        private const string NeptunoDB = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True";
+        private const string ViajesDB = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Viajes;Integrated Security=True";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection Neptuno = new SqlConnection(NeptunoDB);
-            Neptuno.Open();
+            SqlConnection Viajes = new SqlConnection(ViajesDB);
+            Viajes.Open();
 
 
         }
