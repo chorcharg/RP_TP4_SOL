@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace RP_TP4
 {
@@ -15,8 +16,12 @@ namespace RP_TP4
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection Viajes = new SqlConnection(ViajesDB);
-            Viajes.Open();
+            if (!IsPostBack)
+            {
+                SqlConnection Viajes = new SqlConnection(ViajesDB);
+                Viajes.Open();
+
+            }
 
 
         }
