@@ -13,17 +13,20 @@ namespace RP_TP4
     {
 
         private const string ViajesDB = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Viajes;Integrated Security=True";
-
+        private string consultaSql = "SELECT * FROM Provincia";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 SqlConnection Viajes = new SqlConnection(ViajesDB);
                 Viajes.Open();
+                SqlCommand sqlCommand = new SqlCommand(consultaSql, Viajes);
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
             }
 
         }
 
     }
+
 }
