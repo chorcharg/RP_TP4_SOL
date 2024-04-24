@@ -13,20 +13,42 @@ namespace RP_TP4
     {
 
         private const string ViajesDB = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Viajes;Integrated Security=True";
-        private string consultaSql = "SELECT * FROM Provincia";
+        private string consultaSql = "SELECT * FROM Provincias";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                SqlConnection Viajes = new SqlConnection(ViajesDB);
-                Viajes.Open();
-                SqlCommand sqlCommand = new SqlCommand(consultaSql, Viajes);
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
+                {
+                    CargarProvincias();
+                    
+                }
             }
-
         }
+        private void CargarProvincias()
+        {
+            using (SqlConnection Viajes = new SqlConnection(ViajesDB))
+            {
+                try
+                {
+                    Viajes.Open();
+                    string consultaSql = "SELECT * FROM Provincias";
+                    SqlCommand sqlCommand = new SqlCommand(consultaSql, Viajes);
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    DdlProvinciaInicio.Items.Clear();
 
+                    DdlProvinciaInicio.Items.Insert(0, new ListItem("--Seleccionar Provincia--", ""));
+                    while (sqlDataReader.Read())
+                    {
+                        string nombreProvincia = sqlDataReader["NombreProvincia"].ToString();
+                        string idProvincia = sqlDataReader["IdProvincia"].ToString();
+                        DdlProvinciaInicio.Items.Add(new ListItem(nombreProvincia, idProvincia));
+
+
+
+                    }
+                }
+                finally { };
+            }
+        }
     }
-
 }
