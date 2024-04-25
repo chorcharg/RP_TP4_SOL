@@ -43,7 +43,6 @@ namespace RP_TP4
             sqlConnection.Close();
 
 
-            //DdlProvinciaInicio.Items.Insert(0, "--Seleccione Provincia--");
 
             DdlProvinciaInicio.Items.Add(new ListItem("--Seleccione Provincia--", "-1"));
             foreach (DataRow provincia in setDatos.Tables["Provincias"].Rows)
@@ -53,16 +52,6 @@ namespace RP_TP4
                     );
 
             }
-
-
-            /*
-            DdlProvinciaInicio.DataSource = setDatos.Tables["Provincias"];
-            DdlProvinciaInicio.DataTextField = "NombreProvincia";
-            DdlProvinciaInicio.DataValueField = "IdProvincia";
-            DdlProvinciaInicio.DataBind();
-            */
-            
-
 
 
         }
