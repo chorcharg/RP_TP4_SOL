@@ -64,18 +64,19 @@ namespace RP_TP4
 
         //como parametros estan los DDL, de esa forma usamos un solo meotdo para ambos conjuntos de DDL
         //desde el evento change de los DDL, llamamos a este metodo, pasandole como argumento 
-        //los DDL quer intervienen
+        //los DDL que intervienen
 
         private void carga_localidades(DropDownList ddlProvincias, DropDownList ddlLocalidades)
         {
             //cargo el value del item seleccionado en el DDL de provincias, como ID de provincia
             String idProvincia = ddlProvincias.SelectedItem.Value;
+            
 
             //simepre limpio y agrego item default
             ddlLocalidades.Items.Clear();
             ddlLocalidades.Items.Add(new ListItem("--Seleccione Localidad--", "-1"));
 
-            //si se selecciono el "defauult" no sigo,
+            //si se selecciono el "default" o "-Seleccione Provincia-", no sigo.
             if (idProvincia == "-1")
             {
                 return;
@@ -103,6 +104,47 @@ namespace RP_TP4
 
 
         }
+        private void quitarProvinciaRepetida(DropDownList ddlInicio, DropDownList ddlFinal)
+        {
+            //COPIO EL VALOR DEL ID DEL ITEM SELECCIONADO EN DdlProvinciasInicio 
+            string idProvinciaInicio = ddlInicio.SelectedItem.Value;
+
+            //"LIMPIO" EL DdlProvinciasFinal Y LE CARGO UN ITEM CON VALUE = -1 (LO MISMO DECIR Q TIENE ID = -1)
+            ddlFinal.Items.Clear();
+            ddlFinal.Items.Add(new ListItem("--Seleccione Provincia--", "-1"));
+
+            //CHEQUEO SI SE ELIGIO EL ITEM CON ID "-1".
+            //Nota: ANTES SI SE ELEGIA EL "SELECCIONE PROVINCIA" SE PROVOCABA EL BORRADO DE TODOS LOS ITEMS,
+            //POR ESO SE REALIZA UNA CARGA NUEVA DE TODOS LOS DATOS.
+            if(idProvinciaInicio == "-1")
+            {
+                foreach(DataRow provincia in setDatos.Tables["Provincias"].Rows)
+                {
+                    ddlFinal.Items.Add(
+                    new ListItem(provincia["NombreProvincia"].ToString(), provincia["IdProvincia"].ToString())
+                    );
+                }
+                return;
+            }
+                
+            // YA FILTRADO CARGO LAS PROVINCIAS, EXEPTO LA QUE YA SE ELIGIO EN EL DDL DEL INICIO.
+            foreach(DataRow provincia in setDatos.Tables["Provincias"].Rows)
+            {
+                //ACA EL IF SE LEE DE LA SIGUIENTE MANERA:
+                // "SI -> EL ID DE PROVINCIA DE LA ROW QUE SE SELECCIONO, ES DISTINTA AL ID QUE COPIE DEL
+                //DdlProvinciaInicio, CARGA LA ROW SELECCIONADA AL DdlProvinciaFinal. 
+                if(!provincia["IdProvincia"].ToString().Equals(idProvinciaInicio))
+                {
+                    ddlFinal.Items.Add(
+                    new ListItem(
+                    provincia["NombreProvincia"].ToString() ,
+                    provincia["IdProvincia"].ToString()
+                    )
+                    );
+                }
+            }
+
+        }
 
         private void CargarProvincias()
         {
@@ -123,6 +165,8 @@ namespace RP_TP4
         {
 
             carga_localidades(DdlProvinciaInicio, DdlLocalidadInicio);
+
+            quitarProvinciaRepetida(DdlProvinciaInicio, DdlProvinciaFinal);
 
         }
 
