@@ -23,23 +23,27 @@ namespace RP_TP4
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //Cargo El dataset con todas las tablas 
+            CargarTablas();
+
             if (!IsPostBack)
             {
-                {
-                    //Cargo El dataset con todas las tablas 
-                    CargarTablas();
-                    //Agrego el item de Seleccione "X"
+
+                    //Agrego el item de Seleccione "default"
                     DdlProvinciaInicio.Items.Add(new ListItem("--Seleccione Provincia--", "-1"));
                     DdlProvinciaFinal.Items.Add(new ListItem("--Seleccione Provincia--", "-1"));
                     DdlLocalidadInicio.Items.Add(new ListItem("--Seleccione Localidad--", "-1"));
                     DdlLocalidadFinal.Items.Add(new ListItem("--Seleccione Localidad--", "-1"));
-                    //Cargo Los DropDownList
-                    CargarProvincias_Y_Localidades();
-                    
 
-                }
+
+                    //Cargo Los DropDownList de provincias
+                    CargarProvincias();
+                    
             }
         }
+
+
         private void CargarTablas()
         {
 
@@ -50,13 +54,57 @@ namespace RP_TP4
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(consultaSqlProvincias, sqlConnection);
             sqlDataAdapter.Fill(setDatos, "Provincias");
 
+            //CARGO LA TABLA DE LOCALIDADES
             sqlDataAdapter = new SqlDataAdapter(consultaSqlLocalidades, sqlConnection);
             sqlDataAdapter.Fill(setDatos, "Localidades");
             sqlConnection.Close();
        
         }
 
-        private void CargarProvincias_Y_Localidades()
+
+        //como parametros estan los DDL, de esa forma usamos un solo meotdo para ambos conjuntos de DDL
+        //desde el evento change de los DDL, llamamos a este metodo, pasandole como argumento 
+        //los DDL quer intervienen
+
+        private void carga_localidades(DropDownList ddlProvincias, DropDownList ddlLocalidades)
+        {
+            //cargo el value del item seleccionado en el DDL de provincias, como ID de provincia
+            String idProvincia = ddlProvincias.SelectedItem.Value;
+
+            //simepre limpio y agrego item default
+            ddlLocalidades.Items.Clear();
+            ddlLocalidades.Items.Add(new ListItem("--Seleccione Localidad--", "-1"));
+
+            //si se selecciono el "defauult" no sigo,
+            if (idProvincia == "-1")
+            {
+                return;
+            }
+
+            // recorro la tabla localidades del setDatos, 
+
+            foreach (DataRow localidad in setDatos.Tables["Localidades"].Rows)
+            {
+
+                // si el campo IdProvincia del row de localidad, me coincide con idProvincia,
+                // lo cargo en el DDL de localidades
+
+                if (localidad["IdProvincia"].ToString().Equals(idProvincia))
+                {
+                    ddlLocalidades.Items.Add(
+                        new ListItem (
+                            localidad["NombreLocalidad"].ToString(), 
+                            localidad["IdLocalidad"].ToString()
+                            )
+                        );
+                }
+
+            }
+
+
+        }
+
+        private void CargarProvincias()
         {
             foreach (DataRow provincia in setDatos.Tables["Provincias"].Rows)
             {
@@ -69,16 +117,18 @@ namespace RP_TP4
                     );
             }
 
-            foreach (DataRow localidad in setDatos.Tables["Localidades"].Rows)
-            {
-                DdlLocalidadInicio.Items.Add(
-                    new ListItem(localidad["NombreLocalidad"].ToString(), localidad["IdLocalidad"].ToString())
-                    );
-                DdlLocalidadFinal.Items.Add(
-                    new ListItem(localidad["NombreLocalidad"].ToString(), localidad["IdLocalidad"].ToString())
-                    );
-            }
         }
 
+        protected void DdlProvinciaInicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            carga_localidades(DdlProvinciaInicio, DdlLocalidadInicio);
+
+        }
+
+        protected void DdlProvinciaFinal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            carga_localidades(DdlProvinciaFinal, DdlLocalidadFinal);
+        }
     }
 }

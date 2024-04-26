@@ -109,6 +109,33 @@
             height: 38px;
             width: 351px;
         }
+        .auto-style31 {
+            height: 63px;
+            width: 56px;
+        }
+        .auto-style32 {
+            height: 48px;
+            width: 56px;
+        }
+        .auto-style33 {
+            height: 51px;
+            width: 56px;
+        }
+        .auto-style34 {
+            width: 56px;
+        }
+        .auto-style35 {
+            height: 61px;
+            width: 56px;
+        }
+        .auto-style36 {
+            height: 43px;
+            width: 56px;
+        }
+        .auto-style37 {
+            height: 38px;
+            width: 56px;
+        }
     </style>
 </head>
 <body>
@@ -119,7 +146,7 @@
                     <td class="auto-style24"></td>
                     <td class="auto-style3"><strong>DESTINO DE INICIO</strong></td>
                     <td class="auto-style17"></td>
-                    <td class="auto-style2"></td>
+                    <td class="auto-style31"></td>
                     <td class="auto-style2"></td>
                     <td class="auto-style2"></td>
                     <td class="auto-style2"></td>
@@ -128,10 +155,10 @@
                     <td class="auto-style25"></td>
                     <td class="auto-style16"><strong>PROVINCIA:</strong></td>
                     <td class="auto-style18"><strong>
-                        <asp:DropDownList ID="DdlProvinciaInicio" runat="server">
+                        <asp:DropDownList ID="DdlProvinciaInicio" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DdlProvinciaInicio_SelectedIndexChanged">
                         </asp:DropDownList>
                         </strong></td>
-                    <td class="auto-style15"></td>
+                    <td class="auto-style32"></td>
                     <td class="auto-style15"></td>
                     <td class="auto-style15"></td>
                     <td class="auto-style15"></td>
@@ -143,7 +170,7 @@
                         <asp:DropDownList ID="DdlLocalidadInicio" runat="server">
                         </asp:DropDownList>
                     </td>
-                    <td class="auto-style13"><strong></strong></td>
+                    <td class="auto-style33"><strong></strong></td>
                     <td class="auto-style13"><strong></strong></td>
                     <td class="auto-style13"><strong></strong></td>
                     <td class="auto-style13"><strong></strong></td>
@@ -152,7 +179,7 @@
                     <td class="auto-style27">&nbsp;</td>
                     <td class="auto-style4">&nbsp;</td>
                     <td class="auto-style20">&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style34">&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -161,7 +188,7 @@
                     <td class="auto-style28"></td>
                     <td class="auto-style8">DESTINO FINAL</td>
                     <td class="auto-style21"></td>
-                    <td class="auto-style7"></td>
+                    <td class="auto-style35"></td>
                     <td class="auto-style7"></td>
                     <td class="auto-style7"></td>
                     <td class="auto-style7"></td>
@@ -170,10 +197,10 @@
                     <td class="auto-style29"></td>
                     <td class="auto-style10"><strong>PROVINCIA:</strong></td>
                     <td class="auto-style22">
-                        <asp:DropDownList ID="DdlProvinciaFinal" runat="server">
+                        <asp:DropDownList ID="DdlProvinciaFinal" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DdlProvinciaFinal_SelectedIndexChanged">
                         </asp:DropDownList>
                     </td>
-                    <td class="auto-style9"></td>
+                    <td class="auto-style36"></td>
                     <td class="auto-style9"></td>
                     <td class="auto-style9"></td>
                     <td class="auto-style9"></td>
@@ -185,7 +212,7 @@
                         <asp:DropDownList ID="DdlLocalidadFinal" runat="server">
                         </asp:DropDownList>
                     </td>
-                    <td class="auto-style11"></td>
+                    <td class="auto-style37"></td>
                     <td class="auto-style11"></td>
                     <td class="auto-style11"></td>
                     <td class="auto-style11"></td>
