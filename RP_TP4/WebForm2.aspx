@@ -69,11 +69,11 @@
                         <asp:Label ID="Lb_IdProducto" runat="server" Text="Id Producto"></asp:Label>
                     </td>
                     <td class="auto-style3">
-                        <asp:DropDownList ID="Ddl_IdProducto" runat="server">
+                        <asp:DropDownList ID="Ddl_IdProducto" runat="server" OnSelectedIndexChanged="Ddl_IdProducto_SelectedIndexChanged">
                         </asp:DropDownList>
                     </td>
                     <td class="auto-style4" colspan="2">
-                        <asp:TextBox ID="Tb_IdProducto" runat="server" Width="290px"></asp:TextBox>
+                        <asp:TextBox ID="Tb_IdProducto" runat="server" Width="290px" OnTextChanged="Tb_IdProducto_TextChanged"></asp:TextBox>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
