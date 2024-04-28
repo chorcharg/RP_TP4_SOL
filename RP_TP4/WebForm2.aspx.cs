@@ -23,7 +23,7 @@ namespace RP_TP4
 
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(consultaProductos, cadenaDeConexion);
                 sqlDataAdapter.Fill(ds, "Productos");
-                // Almacenar el DataSet en el estado de sesión
+                // Almacenar el DataSet en el estado
                 Session["ProductosDataSet"] = ds;
 
                 Gv_Productos.DataSource = ds.Tables["Productos"];
@@ -69,6 +69,36 @@ namespace RP_TP4
 
         }
 
-       
+        protected void Tb_IdCategoria_TextChanged(object sender, EventArgs e)
+        {
+            // Obtener el valor ingresado en el TextBox
+            string idCategoria = Tb_IdCategoria.Text.Trim();
+
+            // Actualizar el DropDownList con el valor ingresado
+            Ddl_IdCategoria.SelectedValue = idCategoria;
+
+            // Filtrar los datos según el ID del producto
+            DataView CategoriaFiltrada = ds.Tables["Productos"].DefaultView;
+            string IdCategFiltrada = $"IdCategoría = '{idCategoria}'";
+            CategoriaFiltrada.RowFilter = IdCategFiltrada;
+
+            // Asignar los datos filtrados al control GridView
+            Gv_Productos.DataSource = CategoriaFiltrada;
+            Gv_Productos.DataBind();
+        }
+
+        protected void Ddl_IdCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Obtiene  el ID de la Categoria seleccionada
+            string idCategoria = Ddl_IdCategoria.SelectedValue;
+
+            // Filtra los datos según el ID del producto
+            DataView CategoriaFiltrada = ds.Tables["Productos"].DefaultView;
+            CategoriaFiltrada.RowFilter = $"IdCategoría = '{idCategoria}'";
+
+            // Asigna los datos filtrados al control GridView 
+            Gv_Productos.DataSource = CategoriaFiltrada;
+            Gv_Productos.DataBind();
+        }
     }
 }
