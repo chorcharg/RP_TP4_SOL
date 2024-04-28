@@ -77,7 +77,7 @@ namespace RP_TP4
             // Actualizar el DropDownList con el valor ingresado
             Ddl_IdCategoria.SelectedValue = idCategoria;
 
-            // Filtrar los datos según el ID del producto
+            // Filtrar los datos según el ID de categoria
             DataView CategoriaFiltrada = ds.Tables["Productos"].DefaultView;
             string IdCategFiltrada = $"IdCategoría = '{idCategoria}'";
             CategoriaFiltrada.RowFilter = IdCategFiltrada;
@@ -92,7 +92,7 @@ namespace RP_TP4
             // Obtiene  el ID de la Categoria seleccionada
             string idCategoria = Ddl_IdCategoria.SelectedValue;
 
-            // Filtra los datos según el ID del producto
+            // Filtra los datos según el ID de Categoria
             DataView CategoriaFiltrada = ds.Tables["Productos"].DefaultView;
             CategoriaFiltrada.RowFilter = $"IdCategoría = '{idCategoria}'";
 
