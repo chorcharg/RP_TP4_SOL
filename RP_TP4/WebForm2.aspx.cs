@@ -18,23 +18,25 @@ namespace RP_TP4
         {
             if (!IsPostBack)
             {
-                SqlConnection sqlConnection = new SqlConnection(cadenaDeConexion);
-                sqlConnection.Open();
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(consultaProductos, cadenaDeConexion);
-                sqlDataAdapter.Fill(ds, "Productos");
-                // Almacenar el DataSet en el estado
-                Session["ProductosDataSet"] = ds;
-
-                Gv_Productos.DataSource = ds.Tables["Productos"];
-                Gv_Productos.DataBind();
-
-                sqlConnection.Close();
+                CargarDatos();
             }
             else
             {
                 // Recuperar el DataSet del estado de sesión
                 ds = (DataSet)Session["ProductosDataSet"];
+            }
+        }
+        protected void CargarDatos()
+        {
+            SqlConnection sqlConnection = new SqlConnection(cadenaDeConexion);
+            {
+                sqlConnection.Open();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(consultaProductos, cadenaDeConexion);
+                sqlDataAdapter.Fill(ds, "Productos");
+                Session["ProductosDataSet"] = ds;
+                Gv_Productos.DataSource = ds.Tables["Productos"];
+                Gv_Productos.DataBind();
+                sqlConnection.Close();
             }
         }
         protected void Tb_IdProducto_TextChanged(object sender, EventArgs e)
@@ -99,6 +101,17 @@ namespace RP_TP4
             // Asigna los datos filtrados al control GridView 
             Gv_Productos.DataSource = CategoriaFiltrada;
             Gv_Productos.DataBind();
+        }
+        protected void LimpiarFiltros()
+        {
+            Tb_IdProducto.Text = "";
+            Tb_IdCategoria.Text = "";
+        }
+
+        protected void Btn_QuitarFiltro_Click(object sender, EventArgs e)
+        {
+            LimpiarFiltros();
+            CargarDatos(); 
         }
     }
 }
