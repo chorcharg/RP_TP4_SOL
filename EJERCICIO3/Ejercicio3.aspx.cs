@@ -16,7 +16,20 @@ namespace EJERCICIO3
         private string ConsultaLibreria = "SELECT * FROM Temas";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                LlenarDropDownListTemas();
+            }
+        }
 
+        private void LlenarDropDownListTemas()
+        {
+            SqlConnection conexion = new SqlConnection(LibreriaBD);
+            SqlCommand comando = new SqlCommand(ConsultaLibreria, conexion);
+            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+            DataTable tablaTemas = new DataTable();
+
+            adaptador.Fill(tablaTemas);
         }
     }
 }
