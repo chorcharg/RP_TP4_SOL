@@ -37,11 +37,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:GridView ID="GvLibros" runat="server" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4">
-                        <Columns>
-                            <asp:BoundField HeaderText="Columna 4" />
-                            <asp:BoundField HeaderText="IdLibro" />
-                        </Columns>
+                    <asp:GridView ID="GvLibros" runat="server" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" OnSelectedIndexChanged="GvLibros_SelectedIndexChanged">
                         <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
                         <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
                         <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
@@ -71,7 +67,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:LinkButton ID="LBConsultarTema" runat="server">Consultar Otro Tema</asp:LinkButton>
+                    <asp:LinkButton ID="LBConsultarTema" runat="server" OnClick="LBConsultarTema_Click">Consultar Otro Tema</asp:LinkButton>
                 </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -80,13 +76,13 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td class="auto-style2"></td>
+                <td class="auto-style2"></td>
+                <td class="auto-style2"></td>
+                <td class="auto-style2"></td>
+                <td class="auto-style2"></td>
+                <td class="auto-style2"></td>
+                <td class="auto-style2"></td>
             </tr>
             <tr>
                 <td class="auto-style2"></td>

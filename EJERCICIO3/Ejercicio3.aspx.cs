@@ -49,12 +49,17 @@ namespace EJERCICIO3
 
         protected void DdlTemas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Obtener el ID del tema seleccionado
+            int idTema = Convert.ToInt32(DdlTemas.SelectedValue);
 
+            // Puedes almacenar el ID en una variable de sesión si necesitas usarlo en otra página.
+            Session["SelectedThemeId"] = idTema;
         }
 
         protected void LbVerLibros_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ListadoLibros.aspx");
+
+            Response.Redirect($"ListadoLibros.aspx?themeId={Session["SelectedThemeId"]}");
         }
     }
 }
