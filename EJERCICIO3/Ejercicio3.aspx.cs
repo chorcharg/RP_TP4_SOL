@@ -14,6 +14,7 @@ namespace EJERCICIO3
         private const string LibreriaBD = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Libreria;Integrated Security=True
  ";
         private string ConsultaLibreria = "SELECT * FROM Temas";
+        private DataSet setDatos = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -25,11 +26,35 @@ namespace EJERCICIO3
         private void LlenarDropDownListTemas()
         {
             SqlConnection conexion = new SqlConnection(LibreriaBD);
+            // Abrir la conexión.
+            conexion.Open();
+
+            // Crear un comando SQL para seleccionar los temas.
             SqlCommand comando = new SqlCommand(ConsultaLibreria, conexion);
             SqlDataAdapter adaptador = new SqlDataAdapter(comando);
-            DataTable tablaTemas = new DataTable();
+            adaptador.Fill(setDatos, "Temas"); 
 
-            adaptador.Fill(tablaTemas);
+            // Enlazar el DropDownList al DataSet.
+            DdlTemas.DataSource = setDatos.Tables["Temas"]; 
+            // Establece el campo que se mostrará en el DropDownList.
+            DdlTemas.DataTextField = "Tema"; 
+            DdlTemas.DataValueField = "IdTema";
+
+            DdlTemas.DataBind();
+
+
+            conexion.Close();
+
+        }
+
+        protected void DdlTemas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LbVerLibros_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ListadoLibros.aspx");
         }
     }
 }

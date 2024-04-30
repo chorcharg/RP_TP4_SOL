@@ -35,7 +35,7 @@
                 <td>&nbsp;</td>
                 <td class="auto-style2"><strong>Seleccionar Tema:</strong></td>
                 <td>
-                    <asp:DropDownList ID="DdlTemas" runat="server">
+                    <asp:DropDownList ID="DdlTemas" runat="server" OnSelectedIndexChanged="DdlTemas_SelectedIndexChanged">
                     </asp:DropDownList>
                 </td>
                 <td>&nbsp;</td>
@@ -81,7 +81,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td class="auto-style2">
-                    <asp:LinkButton ID="LbVerLibros" runat="server">Ver Libros</asp:LinkButton>
+                    <asp:LinkButton ID="LbVerLibros" runat="server" OnClick="LbVerLibros_Click">Ver Libros</asp:LinkButton>
                 </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
