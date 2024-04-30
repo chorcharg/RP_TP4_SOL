@@ -52,15 +52,15 @@
         <div>
             <table class="auto-style1">
                 <tr>
-                    <td class="auto-style13">
-                        &nbsp;</td>
-                    <td class="auto-style2">
-                        &nbsp;</td>
-                    <td class="auto-style3">
-                        &nbsp;</td>
-                    <td class="auto-style4" colspan="2">
-                        &nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style14">
+                        </td>
+                    <td class="auto-style5">
+                        </td>
+                    <td class="auto-style6">
+                        </td>
+                    <td class="auto-style7" colspan="2">
+                        </td>
+                    <td class="auto-style8"></td>
                 </tr>
                 <tr>
                     <td class="auto-style13">
@@ -69,11 +69,14 @@
                         <asp:Label ID="Lb_IdProducto" runat="server" Text="Id Producto"></asp:Label>
                     </td>
                     <td class="auto-style3">
-                        <asp:DropDownList ID="Ddl_IdProducto" runat="server" OnSelectedIndexChanged="Ddl_IdProducto_SelectedIndexChanged">
+                        <asp:DropDownList ID="Ddl_IdProducto" runat="server" Height="18px">
+                            <asp:ListItem Value="=">Igual a</asp:ListItem>
+                            <asp:ListItem Value="&gt;">Mayor a</asp:ListItem>
+                            <asp:ListItem Value="&lt;">Menor a</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                     <td class="auto-style4" colspan="2">
-                        <asp:TextBox ID="Tb_IdProducto" runat="server" Width="290px" OnTextChanged="Tb_IdProducto_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="Tb_IdProducto" runat="server" Width="289px"></asp:TextBox>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -84,11 +87,14 @@
                         <asp:Label ID="Lb_IdCategoria" runat="server" Text="IdCategoria"></asp:Label>
                     </td>
                     <td class="auto-style3">
-                        <asp:DropDownList ID="Ddl_IdCategoria" runat="server" OnSelectedIndexChanged="Ddl_IdCategoria_SelectedIndexChanged">
+                        <asp:DropDownList ID="Ddl_IdCategoria" runat="server" Height="18px">
+                            <asp:ListItem Value="=">Igual a</asp:ListItem>
+                            <asp:ListItem Value="&gt;">Mayor a</asp:ListItem>
+                            <asp:ListItem Value="&lt;">Menor a</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                     <td class="auto-style4" colspan="2">
-                        <asp:TextBox ID="Tb_IdCategoria" runat="server" Width="290px" OnTextChanged="Tb_IdCategoria_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="Tb_IdCategoria" runat="server" Width="290px"></asp:TextBox>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -96,7 +102,7 @@
                     <td class="auto-style14">&nbsp;</td>
                     <td class="auto-style5"></td>
                     <td class="auto-style6"></td>
-                    <td class="auto-style7" colspan="2"></td>
+                    <td class="auto-style7" colspan="2">&nbsp;</td>
                     <td class="auto-style8"></td>
                 </tr>
                 <tr>
@@ -104,10 +110,10 @@
                     <td class="auto-style2">&nbsp;</td>
                     <td class="auto-style3">&nbsp;</td>
                     <td class="auto-style12">
-                        <asp:Button ID="Btn_Filtrar" runat="server" Text="Filtrar" />
+                        <asp:Button ID="Btn_Filtrar" runat="server" Text="Filtrar" OnClick="Btn_Filtrar_Click" />
                     </td>
                     <td class="auto-style12">
-                        <asp:Button ID="Btn_QuitarFiltro" runat="server" Text="Quitar filtro" />
+                        <asp:Button ID="Btn_QuitarFiltro" runat="server" Text="Quitar filtro" OnClick="Btn_QuitarFiltro_Click" />
                     </td>
                     <td>&nbsp;</td>
                 </tr>
