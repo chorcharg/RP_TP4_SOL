@@ -54,39 +54,36 @@ namespace RP_TP4
 
             if (!validarTbs())
             {
-                lbl_error1.Text = "Debe ingresar almenos un filtro";
+                lbl_error1.Text = "Debe ingresar al menos un filtro";
                 return;
             }
             lbl_error1.Text = "";
 
-
             SqlConnection sqlConnection = new SqlConnection(cadenaDeConexion);
-
             sqlConnection.Open();
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(ArmadoFiltro() , cadenaDeConexion);
-            sqlDataAdapter.Fill(dataProductos, "Productos");
-
+            
+            if(Tb_IdCategoria.Text.Trim() != "" && Tb_IdProducto.Text.Trim() != "")
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(FiltroDoble() , cadenaDeConexion);
+                sqlDataAdapter.Fill(dataProductos, "Productos");
+            }
+            else
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(FiltroSimple(), cadenaDeConexion);
+                sqlDataAdapter.Fill(dataProductos, "Productos");
+            }
+                
             //cargo el grid view
             Gv_Productos.DataSource = dataProductos.Tables["Productos"];
             Gv_Productos.DataBind();
 
             sqlConnection.Close();
         }
-        private string ArmadoFiltro()
+        private string FiltroSimple()
         {
-
             string ConsultaFiltro = consultaProductos + " WHERE ";
-
-            if(Tb_IdCategoria.Text.Trim() != "" && Tb_IdProducto.Text.Trim() != "")
-            {
-                ConsultaFiltro += 
-                    "IdProducto " + Ddl_IdProducto.SelectedValue.ToString() + Tb_IdProducto.Text 
-                    + " AND " + 
-                    " IdCategoría " + Ddl_IdCategoria.SelectedValue.ToString() + Tb_IdCategoria.Text;
-            }
             
-            else if (Tb_IdProducto.Text.Trim() != "")
+            if (Tb_IdProducto.Text.Trim() != "")
             {
                 ConsultaFiltro += "IdProducto " + Ddl_IdProducto.SelectedValue.ToString() + Tb_IdProducto.Text.Trim();
             }
@@ -98,6 +95,21 @@ namespace RP_TP4
 
             return ConsultaFiltro;
         }
+
+        private string FiltroDoble()
+        {
+            
+            string ConsultaFiltro = consultaProductos + " WHERE ";
+            
+                ConsultaFiltro +=
+                    "IdProducto " + Ddl_IdProducto.SelectedValue.ToString() + Tb_IdProducto.Text
+                    + " AND " +
+                    " IdCategoría " + Ddl_IdCategoria.SelectedValue.ToString() + Tb_IdCategoria.Text;
+                       
+            return ConsultaFiltro;
+        }
+
+
 
         private Boolean validarTbs()
         {
