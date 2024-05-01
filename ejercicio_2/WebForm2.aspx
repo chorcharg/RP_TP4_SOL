@@ -76,9 +76,11 @@
                         </asp:DropDownList>
                     </td>
                     <td class="auto-style4" colspan="2">
-                        <asp:TextBox ID="Tb_IdProducto" runat="server" Width="289px"></asp:TextBox>
+                        <asp:TextBox ID="Tb_IdProducto" runat="server" Width="289px" CausesValidation="True" ValidationGroup="vgFiltros"></asp:TextBox>
                     </td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Tb_IdProducto" ErrorMessage="RegularExpressionValidator" ValidationExpression="^[0-9]*$" ValidationGroup="vgFiltros">Solo numeros </asp:RegularExpressionValidator>
+                    </td>
                 </tr>
                 <tr>
                     <td class="auto-style13">
@@ -94,15 +96,19 @@
                         </asp:DropDownList>
                     </td>
                     <td class="auto-style4" colspan="2">
-                        <asp:TextBox ID="Tb_IdCategoria" runat="server" Width="290px"></asp:TextBox>
+                        <asp:TextBox ID="Tb_IdCategoria" runat="server" Width="290px" ValidationGroup="vgFiltros"></asp:TextBox>
                     </td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <asp:RegularExpressionValidator ID="revCat" runat="server" ControlToValidate="Tb_IdCategoria" ErrorMessage="RegularExpressionValidator" ValidationExpression="^[0-9]*$" ValidationGroup="vgFiltros">Solo numeros </asp:RegularExpressionValidator>
+                    </td>
                 </tr>
                 <tr>
                     <td class="auto-style14">&nbsp;</td>
                     <td class="auto-style5"></td>
                     <td class="auto-style6"></td>
-                    <td class="auto-style7" colspan="2">&nbsp;</td>
+                    <td class="auto-style7" colspan="2">
+                        <asp:Label ID="lbl_error1" runat="server"></asp:Label>
+                    </td>
                     <td class="auto-style8"></td>
                 </tr>
                 <tr>
@@ -110,7 +116,7 @@
                     <td class="auto-style2">&nbsp;</td>
                     <td class="auto-style3">&nbsp;</td>
                     <td class="auto-style12">
-                        <asp:Button ID="Btn_Filtrar" runat="server" Text="Filtrar" OnClick="Btn_Filtrar_Click" />
+                        <asp:Button ID="Btn_Filtrar" runat="server" Text="Filtrar" OnClick="Btn_Filtrar_Click" ValidationGroup="vgFiltros" />
                     </td>
                     <td class="auto-style12">
                         <asp:Button ID="Btn_QuitarFiltro" runat="server" Text="Quitar filtro" OnClick="Btn_QuitarFiltro_Click" />

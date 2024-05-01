@@ -51,6 +51,15 @@ namespace RP_TP4
 
         protected void Btn_Filtrar_Click(object sender, EventArgs e)
         {
+
+            if (!validarTbs())
+            {
+                lbl_error1.Text = "Debe ingresar almenos un filtro";
+                return;
+            }
+            lbl_error1.Text = "";
+
+
             SqlConnection sqlConnection = new SqlConnection(cadenaDeConexion);
 
             sqlConnection.Open();
@@ -89,5 +98,20 @@ namespace RP_TP4
 
             return ConsultaFiltro;
         }
+
+        private Boolean validarTbs()
+        {
+
+            if(Tb_IdCategoria.Text.Trim()=="" && Tb_IdProducto.Text.Trim() == "")
+            {
+
+                return false;
+            }
+
+
+            return true;
+        }
+
     }
+
 }
